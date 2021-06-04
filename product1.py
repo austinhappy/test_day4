@@ -1,13 +1,19 @@
-#讀取檔案並分割再載入
+import os # operating system
 products = []
 
-with open('products.csv', 'r', encoding='utf-8') as f:
-	for line in f:
-		if '商品,價格' in line:
-			continue #直接先跳出繼續執行下一個for迴圈
-		name, price = line.strip().split(',')
-		products.append([name, price])
-print(products)
+# 檢查檔案是否存在
+if os.path.isfile('products.csv'): # 需要絕對路徑，在同資料夾中搜尋products是否存在
+	print('檔案存在')
+	with open('products.csv', 'r', encoding='utf-8') as f:
+		for line in f:
+			if '商品,價格' in line:
+				continue #直接先跳出繼續執行下一個for迴圈
+			name, price = line.strip().split(',')
+			products.append([name, price])
+	print(products)
+else:
+	print('找不到檔案...')
+
 
 # 讓使用者輸入商品名稱和價格
 while True:
